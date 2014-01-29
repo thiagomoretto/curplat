@@ -1,0 +1,8 @@
+all:
+	g++ -c src/dialog.cpp -o obj/dialog.o
+	g++ -c src/button.cpp -o obj/button.o
+	g++ -c src/main.cpp -o obj/main.o
+	g++ obj/dialog.o obj/button.o obj/main.o -o userconf -lpanel -lcurses -ggdb
+
+
+

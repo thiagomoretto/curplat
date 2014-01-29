@@ -1,0 +1,3 @@
+#!/bin/sh 
+ cd ../../ 
+ tar czf curplat-0.4-devel-pkg.tar.gz curplat-0.4-devel 2>  curplat-0.4-devel/.devel-pkg-error.log 

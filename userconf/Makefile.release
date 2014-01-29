@@ -1,0 +1,47 @@
+TOPDIR := $(shell /bin/pwd)
+VERSION := $(shell /bin/cat .VERSION)
+SOURCEDIR := src/
+OBJDIR := $(SOURCEDIR)
+BINNAME := userconf
+
+OBJS = $(OBJDIR)button.o $(OBJDIR)contentbox.o $(OBJDIR)dialog.o $(OBJDIR)linebox.o $(OBJDIR)menu.o $(OBJDIR)main.o
+
+HOSTCC = g++
+HOSTCFLAGS = -lpanel -lcurses -ggdb -DVERSION=\"$(VERSION)\"
+OBJCFLAGS = -DVERSION=\"$(VERSION)\"
+
+all: button.o contentbox.o dialog.o linebox.o menu.o main.o linker
+
+linker:
+	$(HOSTCC) $(OBJS) -o $(BINNAME) $(HOSTCFLAGS)
+
+main.o:
+	g++ -c $(SOURCEDIR)main.cpp -o $(OBJDIR)main.o $(OBJCFLAGS)
+
+button.o:
+	g++ -c $(SOURCEDIR)button.cpp -o $(OBJDIR)button.o
+
+contentbox.o:
+	g++ -c $(SOURCEDIR)contentbox.cpp -o $(OBJDIR)contentbox.o
+
+dialog.o:
+	g++ -c $(SOURCEDIR)dialog.cpp -o $(OBJDIR)dialog.o
+
+linebox.o:
+	g++ -c $(SOURCEDIR)linebox.cpp -o $(OBJDIR)linebox.o
+
+menu.o:
+	g++ -c $(SOURCEDIR)menu.cpp -o $(OBJDIR)menu.o
+
+clean:
+	rm $(OBJDIR)/*.o
+
+install:
+	cp $(BINNAME) /usr/sbin;
+
+uninstall: 
+	rm /usr/sbin/$(BINNAME) -f
+	
+	
+
+	
